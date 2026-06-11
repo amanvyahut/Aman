@@ -15,7 +15,25 @@ jobs:
           unzip -o TSCRIC-LoRa-AndroidApp-GPS-Fixed.zip
           mv TSCRICApp/* .
 
-      - name: Fix build.gradle
+      - name: Fix gradle wrapper
+        run: |
+          cat > gradle/wrapper/gradle-wrapper.properties << 'PROPS'
+          distributionBase=GRADLE_USER_HOME
+          distributionPath=wrapper/dists
+          distributionUrl=https\://services.gradle.org/distributions/gradle-8.4-bin.zip
+          zipStoreBase=GRADLE_USER_HOME
+          zipStorePath=wrapper/dists
+          PROPS
+
+      - name: Fix root build.gradle
+        run: |
+          cat > build.gradle << 'GRADLE'
+          plugins {
+              id 'com.android.application' version '8.2.0' apply false
+          }
+          GRADLE
+
+      - name: Fix app build.gradle
         run: |
           cat > app/build.gradle << 'GRADLE'
           plugins {
@@ -43,7 +61,6 @@ jobs:
           }
           dependencies {
               implementation 'androidx.appcompat:appcompat:1.6.1'
-              implementation 'androidx.core:core:1.12.0'
           }
           GRADLE
 
