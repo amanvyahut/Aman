@@ -12,7 +12,7 @@ jobs:
 
       - name: Extract ZIP
         run: |
-          unzip -o TSCRIC-Upload.zip
+          unzip -o TSCRIC-ReadyToBuild.zip
           cp -r NewApp/* .
 
       - name: Setup JDK 17
