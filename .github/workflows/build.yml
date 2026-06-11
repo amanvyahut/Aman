@@ -10,6 +10,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Extract ZIP
+        run: |
+          unzip -o TSCRIC-Upload.zip
+          cp -r NewApp/* .
+
       - name: Setup JDK 17
         uses: actions/setup-java@v4
         with:
